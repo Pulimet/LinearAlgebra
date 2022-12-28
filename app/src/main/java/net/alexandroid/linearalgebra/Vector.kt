@@ -81,6 +81,7 @@ class Vector(private val coordinates: Array<Double>) {
     }
 
     fun dotProduct(vector: Vector): Double {
+        validateSameSize(vector)
         var result = 0.0
         this.coordinates.forEachIndexed { index, coordinate ->
             result += coordinate * vector.coordinates[index]
@@ -89,10 +90,15 @@ class Vector(private val coordinates: Array<Double>) {
     }
 
     fun angle(vector: Vector): Double {
+        validateSameSize(vector)
         val dotProduct = this.dotProduct(vector)
         val magnitudes = this.magnitude() * vector.magnitude()
         return acos(dotProduct / magnitudes)
     }
+
+    fun isSameDirectionAs(vector: Vector) = this.dotProduct(vector) == this.magnitude() * vector.magnitude()
+    fun isOppositeDirectionTo(vector: Vector) = this.dotProduct(vector) == this.magnitude() * vector.magnitude() * -1
+    fun is90degreesTo(vector: Vector) = this.dotProduct(vector) == 0.0
 
     // Private
     private fun validateSameSize(vector: Vector) {
@@ -117,3 +123,6 @@ fun Double.round(i: Int): Double {
     val multi = 10.0.pow(i)
     return (this * multi).roundToInt() / multi
 }
+
+fun Double.toDegrees() = Math.toDegrees(this)
+
