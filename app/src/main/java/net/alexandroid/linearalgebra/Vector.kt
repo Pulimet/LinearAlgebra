@@ -2,6 +2,7 @@
 
 package net.alexandroid.linearalgebra
 
+import kotlin.math.abs
 import kotlin.math.acos
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -96,10 +97,22 @@ class Vector(private val coordinates: Array<Double>) {
         return acos(dotProduct / magnitudes)
     }
 
-    fun isParallelTo(vector: Vector) = this.dotProduct(vector) == this.magnitude() * vector.magnitude()
+    fun isParallelTo(vector: Vector): Boolean {
+        val dotProduct = this.dotProduct(vector)
+        val magnitudes = this.magnitude() * vector.magnitude()
+        //Log.d("AlgebraResult", "dotProduct: $dotProduct")
+        //Log.d("AlgebraResult", "magnitudes: $magnitudes")
+        return abs(dotProduct) == magnitudes
+    }
+
     fun isOppositeDirectionTo(vector: Vector) = this.dotProduct(vector) == this.magnitude() * vector.magnitude() * -1
+
     // is90degreesTo
-    fun isOrthogonalTo(vector: Vector) = this.dotProduct(vector) == 0.0
+    fun isOrthogonalTo(vector: Vector): Boolean {
+        val dotProduct = this.dotProduct(vector).round(3)
+        //Log.d("AlgebraResult", "dotProduct: $dotProduct")
+        return dotProduct == 0.0
+    }
 
     // Private
     private fun validateSameSize(vector: Vector) {

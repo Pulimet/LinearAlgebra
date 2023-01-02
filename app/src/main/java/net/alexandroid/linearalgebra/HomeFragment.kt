@@ -9,6 +9,7 @@ import net.alexandroid.linearalgebra.databinding.FragmentHomeBinding
 private const val TAG = "AlgebraResult"
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+    @Suppress("unused")
     private val binding by FragmentBinding(FragmentHomeBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,13 +25,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         Log.d(TAG, "7: ${Vector(-5.955, -4.904, -1.874).dotProduct(Vector(-4.496, -8.755, 7.103).round(3)).round(3)}")
         Log.d(TAG, "8: ${Vector(3.183, -7.627).angle(Vector(-2.668, 5.319)).round(3)}")
         Log.d(TAG, "9: ${Vector(7.35, 0.221, 5.188).angle(Vector(2.751, 8.259, 3.985)).toDegrees().round(3)}")
-        Log.d(TAG, "10: isParallel?: ${Vector(-7.579, -7.99).isParallelTo(Vector(22.737, 23.64))}")
-        Log.d(TAG, "11: isParallel?: ${Vector(-2.029, 9.97, 4.172).isParallelTo(Vector(-9.231, 6.639, 7.245))}")
-        Log.d(TAG, "12: isParallel?: ${Vector(-2.328, -7.284, -1.214).isParallelTo(Vector(-1.821, 1.072, -2.94))}")
-        Log.d(TAG, "13: isParallel?: ${Vector(2.118, 4.827).isParallelTo(Vector(0, 0))}")
-        Log.d(TAG, "14: isOrthogonalTo?: ${Vector(-7.579, -7.99).isOrthogonalTo(Vector(22.737, 23.64))}")
-        Log.d(TAG, "15: isOrthogonalTo?: ${Vector(-2.029, 9.97, 4.172).isOrthogonalTo(Vector(-9.231, 6.639, 7.245))}")
-        Log.d(TAG, "16: isOrthogonalTo?: ${Vector(-2.328, -7.284, -1.214).isOrthogonalTo(Vector(-1.821, 1.072, -2.94))}")
-        Log.d(TAG, "17: isOrthogonalTo?: ${Vector(2.118, 4.827).isOrthogonalTo(Vector(0, 0))}")
+
+        val vector1 = Vector(-7.579, -7.88)
+        val vector2 = Vector(22.737, 23.64)
+        val vector3 = Vector(-2.029, 9.97, 4.172)
+        val vector4 = Vector(-9.231, 6.639, 7.245)
+        val vector5 = Vector(-2.328, -7.284, -1.214)
+        val vector6 = Vector(-1.821, 1.072, -2.94)
+        val vector7 = Vector(2.118, 4.827)
+        val vector8 = Vector(0, 0)
+        Log.d(TAG, "10: isParallel?: ${vector1.isParallelTo(vector2)}")
+        Log.d(TAG, "11: isOrthogonalTo?: ${vector1.isOrthogonalTo(vector2)}")
+        Log.d(TAG, "12: isParallel?: ${vector3.isParallelTo(vector4)}")
+        Log.d(TAG, "13: isOrthogonalTo?: ${vector3.isOrthogonalTo(vector4)}")
+        Log.d(TAG, "14: isParallel?: ${vector5.isParallelTo(vector6)}")
+        Log.d(TAG, "15: isOrthogonalTo?: ${vector5.isOrthogonalTo(vector6)}")
+        Log.d(TAG, "16: isParallel?: ${vector7.isParallelTo(vector8)}")
+        Log.d(TAG, "17: isOrthogonalTo?: ${vector7.isOrthogonalTo(vector8)}")
     }
 }
