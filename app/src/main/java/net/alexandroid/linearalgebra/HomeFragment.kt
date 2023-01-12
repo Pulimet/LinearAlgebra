@@ -42,5 +42,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         Log.d(TAG, "15: isOrthogonalTo?: ${vector5.isOrthogonalTo(vector6)}")
         Log.d(TAG, "16: isParallel?: ${vector7.isParallelTo(vector8)}")
         Log.d(TAG, "17: isOrthogonalTo?: ${vector7.isOrthogonalTo(vector8)}")
+
+        Log.d(TAG, "18: ${Vector(3.039, 1.879).componentParallelTo(Vector(0.825, 2.036)).round(3)}")
+        Log.d(TAG, "19: ${Vector(-9.88, -3.264, -8.159).componentOrthogonalTo(Vector(-2.155, -9.353, -9.473)).round(3)}")
+
+        val v1 = Vector(3.009, -6.172, 3.692, -2.51)
+        val v2 = Vector(6.404, -9.144, 2.759, 8.718)
+        Log.d(TAG, "20: ${v1.componentParallelTo(v2).round(3)}")
+        Log.d(TAG, "21: ${v1.componentOrthogonalTo(v2).round(3)}")
+
+        val a = Vector(8.462, 7.893, -8.187)
+        val b = Vector(6.984, -5.975, 4.778)
+        val c = Vector(-8.987, -9.838, 5.031)
+        val d = Vector(-4.268, -1.861, -8.866)
+        val e = Vector(1.5, 9.547, 3.691)
+        val f = Vector(-6.007, 0.124, 5.772)
+        Log.d(TAG, "22: ${a.crossProduct(b).round(3)}")
+        Log.d(TAG, "23: ${c.areaParallelogram(d).round(3)}")
+        Log.d(TAG, "24: ${e.areaOfTriangle(f).round(3)}")
     }
 }

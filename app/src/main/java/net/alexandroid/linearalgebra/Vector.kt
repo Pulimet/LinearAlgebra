@@ -13,6 +13,7 @@ class Vector(private val coordinates: Array<Double>) {
     constructor(x: Int, y: Int) : this(x.toDouble(), y.toDouble())
     constructor(x: Double, y: Double, z: Double) : this(arrayOf(x, y, z))
     constructor(x: Int, y: Int, z: Int) : this(x.toDouble(), y.toDouble(), z.toDouble())
+    constructor(x: Double, y: Double, z: Double, q: Double) : this(arrayOf(x, y, z, q))
 
     init {
         if (coordinates.size < 2) throw IllegalStateException("Vector should has at least two coordinates")
@@ -114,9 +115,46 @@ class Vector(private val coordinates: Array<Double>) {
         return dotProduct == 0.0
     }
 
+    fun componentParallelTo(baseVector: Vector): Vector {
+        val basisNormalized = baseVector.normalization()
+        val weight = this.dotProduct(basisNormalized)
+        return basisNormalized * weight
+    }
+
+    fun componentOrthogonalTo(baseVector: Vector): Vector {
+        val projection = this.componentParallelTo(baseVector)
+        return this - projection
+    }
+
+    fun crossProduct(vector: Vector): Vector {
+        validateSameSize(vector)
+        validateSizeOfThree()
+        val (x1, y1, z1) = this.coordinates
+        val (x2, y2, z2) = vector.coordinates
+        return Vector(
+            y1 * z2 - y2 * z1,
+            -1 * (x1 * z2 - x2 * z1),
+            x1 * y2 - x2 * y1
+        )
+    }
+
+    fun areaParallelogram(vector: Vector): Double {
+        val crossProduct = this.crossProduct(vector)
+        return crossProduct.magnitude()
+    }
+
+    fun areaOfTriangle(vector: Vector): Double {
+        return this.areaParallelogram(vector) / 2.0
+    }
+
+
     // Private
     private fun validateSameSize(vector: Vector) {
         if (this.coordinates.size != vector.coordinates.size) throw IllegalStateException("Failed due to unequal amount of coordinates")
+    }
+
+    private fun validateSizeOfThree() {
+        if (this.coordinates.size != 3) throw IllegalStateException("Only for 3 dimension supported")
     }
 
     private fun roundDouble(r: Int?, d: Double) = if (r != null) {
